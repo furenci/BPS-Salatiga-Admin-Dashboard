@@ -15,6 +15,10 @@ import { AdminNotifications } from './pages/admin/AdminNotifications';
 import { AdminActivityLog } from './pages/admin/AdminActivityLog';
 import { AdminReporting } from './pages/admin/AdminReporting';
 import { AdminEmergency } from './pages/admin/AdminEmergency';
+import { SupervisorDashboard } from './pages/supervisor/SupervisorDashboard';
+import { SupervisorDocumentPreview } from './pages/supervisor/SupervisorDocumentPreview';
+import { SupervisorCalendar } from './pages/supervisor/SupervisorCalendar';
+import { SupervisorHistory } from './pages/supervisor/SupervisorHistory';
 export function App() {
   return <Router>
       <Routes>
@@ -35,6 +39,12 @@ export function App() {
         <Route path="/admin/activity-log" element={<AdminActivityLog />} />
         <Route path="/admin/reporting" element={<AdminReporting />} />
         <Route path="/admin/emergency" element={<AdminEmergency />} />
+
+        {/* Supervisor Routes */}
+        <Route path="/supervisor" element={<SupervisorDashboard />} />
+        <Route path="/supervisor/preview/:id" element={<SupervisorDocumentPreview />} />
+        <Route path="/supervisor/calendar" element={<SupervisorCalendar />} />
+        <Route path="/supervisor/history" element={<SupervisorHistory />} />
       </Routes>
 
       {/* Dev Navigation Helper - Remove in production */}
@@ -61,14 +71,15 @@ export function App() {
             <Link to="/admin/archive" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
               Admin Archive
             </Link>
-            <Link to="/admin/activity-log" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Activity Log
+            <div className="border-t border-gray-200 my-1"></div>
+            <Link to="/supervisor" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700 font-bold">
+              Supervisor Dashboard
             </Link>
-            <Link to="/admin/reporting" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Reporting
+            <Link to="/supervisor/calendar" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+              Supervisor Calendar
             </Link>
-            <Link to="/admin/emergency" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Emergency
+            <Link to="/supervisor/history" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+              Supervisor History
             </Link>
           </div>
         </div>
