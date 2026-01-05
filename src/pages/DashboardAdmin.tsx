@@ -1,12 +1,12 @@
 import React from 'react';
-import { Sidebar } from '../components/Sidebar';
+import { AdminSidebar } from '../components/AdminSidebar';
 import { Header } from '../components/Header';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
 import { Badge } from '../components/ui/Badge';
-import { Calendar, Download, Filter, Search, Eye, Trash2, FileText, CheckCircle, XCircle } from 'lucide-react';
+import { FileText, CheckCircle, Clock, Wallet, ArrowRight } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { Link } from 'react-router-dom';
 export function DashboardAdmin() {
   // Mock Data for Charts
   const barData = [{
@@ -29,70 +29,95 @@ export function DashboardAdmin() {
     surat: 55
   }];
   const pieData = [{
-    name: 'Approved',
-    value: 120
+    name: 'Surat Tugas',
+    value: 180
   }, {
-    name: 'Rejected',
-    value: 15
-  }, {
-    name: 'Pending',
-    value: 25
+    name: 'Surat Dinas',
+    value: 67
   }];
-  const COLORS = ['#10B981', '#EF4444', '#F59E0B'];
+  const COLORS = ['#00509E', '#FF8C00'];
   const recentActivities = [{
     id: 1,
-    user: 'Raina',
-    action: 'created surat',
-    target: '#101',
-    time: '2 mins ago',
-    icon: FileText,
-    color: 'text-blue-500 bg-blue-50'
+    text: 'Raina mengedit Surat No. 102',
+    time: '2 mins ago'
   }, {
     id: 2,
-    user: 'Pak Kepala',
-    action: 'approved surat',
-    target: '#099',
-    time: '1 hour ago',
-    icon: CheckCircle,
-    color: 'text-green-500 bg-green-50'
+    text: 'Budi menghapus draft Surat No. 099',
+    time: '1 hour ago'
   }, {
     id: 3,
-    user: 'Joko',
-    action: 'archived surat',
-    target: '#095',
-    time: '3 hours ago',
-    icon: FileText,
-    color: 'text-gray-500 bg-gray-50'
+    text: 'Pak Kepala menyetujui Surat No. 105',
+    time: '3 hours ago'
   }, {
     id: 4,
-    user: 'Pak Kepala',
-    action: 'rejected surat',
-    target: '#100',
-    time: '5 hours ago',
-    icon: XCircle,
-    color: 'text-red-500 bg-red-50'
+    text: 'Siti membuat Surat Dinas baru',
+    time: '5 hours ago'
   }];
   return <div className="min-h-screen bg-gray-50">
-      <Sidebar />
+      <AdminSidebar />
       <Header user={{
-      name: 'Joko',
-      role: 'Admin',
+      name: 'Admin',
+      role: 'Administrator',
       avatar: ''
     }} />
 
       <main className="md:pl-64 pt-16 transition-all duration-300">
         <div className="p-6 max-w-[1600px] mx-auto space-y-6">
-          {/* Top Controls */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                <input type="text" placeholder="Start Date - End Date" className="pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-[#00509E] focus:outline-none w-64" />
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Dashboard Overview
+            </h1>
+            <p className="text-gray-500">
+              Monitoring kesehatan administrasi kantor secara menyeluruh.
+            </p>
+          </div>
+
+          {/* Top Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="p-4 border-l-4 border-l-[#00509E]">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-gray-500">Total Surat</p>
+                  <p className="text-2xl font-bold text-gray-900">247</p>
+                </div>
+                <div className="p-2 bg-blue-50 rounded-lg">
+                  <FileText className="w-5 h-5 text-[#00509E]" />
+                </div>
               </div>
-            </div>
-            <Button variant="outline" leftIcon={<Download className="w-4 h-4" />}>
-              Export to Excel
-            </Button>
+            </Card>
+            <Card className="p-4 border-l-4 border-l-orange-500">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-gray-500">Pending Approval</p>
+                  <p className="text-2xl font-bold text-gray-900">12</p>
+                </div>
+                <div className="p-2 bg-orange-50 rounded-lg">
+                  <Clock className="w-5 h-5 text-orange-600" />
+                </div>
+              </div>
+            </Card>
+            <Card className="p-4 border-l-4 border-l-green-500">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-gray-500">Approved (Bulan Ini)</p>
+                  <p className="text-2xl font-bold text-gray-900">45</p>
+                </div>
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                </div>
+              </div>
+            </Card>
+            <Card className="p-4 border-l-4 border-l-purple-500">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-gray-500">Anggaran Terpakai</p>
+                  <p className="text-2xl font-bold text-gray-900">15 Kode</p>
+                </div>
+                <div className="p-2 bg-purple-50 rounded-lg">
+                  <Wallet className="w-5 h-5 text-purple-600" />
+                </div>
+              </div>
+            </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -101,7 +126,7 @@ export function DashboardAdmin() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="h-80">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">
-                    Jumlah Surat per Bulan
+                    Surat Keluar per Bulan
                   </h3>
                   <ResponsiveContainer width="100%" height="85%">
                     <BarChart data={barData}>
@@ -118,7 +143,7 @@ export function DashboardAdmin() {
 
                 <Card className="h-80">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">
-                    Status Surat
+                    Distribusi Jenis Surat
                   </h3>
                   <ResponsiveContainer width="100%" height="85%">
                     <PieChart>
@@ -132,96 +157,54 @@ export function DashboardAdmin() {
                 </Card>
               </div>
 
-              {/* Master Data Table */}
-              <Card className="overflow-hidden" noPadding>
-                <div className="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+              {/* Activity Log Widget */}
+              <Card>
+                <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-bold text-gray-900">
-                    Semua Arsip Surat
+                    Aktivitas Terbaru
                   </h3>
-                  <div className="flex items-center gap-2 w-full sm:w-auto">
-                    <div className="relative flex-1 sm:flex-none">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input type="text" placeholder="Cari surat..." className="pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-[#00509E] focus:outline-none w-full sm:w-64" />
-                    </div>
-                    <Button variant="outline" size="icon" className="shrink-0">
-                      <Filter className="w-4 h-4" />
-                    </Button>
-                  </div>
+                  <Link to="/admin/activity-log" className="text-sm text-[#00509E] font-medium hover:underline flex items-center gap-1">
+                    Lihat Semua <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm text-left">
-                    <thead className="text-xs text-gray-500 uppercase bg-gray-50 border-b border-gray-100">
-                      <tr>
-                        <th className="px-6 py-3 font-medium">No. Surat</th>
-                        <th className="px-6 py-3 font-medium">Jenis</th>
-                        <th className="px-6 py-3 font-medium">Pegawai</th>
-                        <th className="px-6 py-3 font-medium">Tanggal</th>
-                        <th className="px-6 py-3 font-medium">Status</th>
-                        <th className="px-6 py-3 font-medium text-right">
-                          Aksi
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100">
-                      {[1, 2, 3, 4, 5].map(i => <tr key={i} className="bg-white hover:bg-gray-50 transition-colors">
-                          <td className="px-6 py-3 font-medium text-gray-900">
-                            ST/2023/10{i}
-                          </td>
-                          <td className="px-6 py-3 text-gray-600">
-                            Surat Tugas
-                          </td>
-                          <td className="px-6 py-3 text-gray-900">Raina</td>
-                          <td className="px-6 py-3 text-gray-600">
-                            2{i} Okt 2023
-                          </td>
-                          <td className="px-6 py-3">
-                            <Badge variant={i % 2 === 0 ? 'success' : 'warning'}>
-                              {i % 2 === 0 ? 'Approved' : 'Pending'}
-                            </Badge>
-                          </td>
-                          <td className="px-6 py-3 text-right">
-                            <div className="flex items-center justify-end gap-2">
-                              <button className="p-1.5 text-gray-500 hover:text-[#00509E] hover:bg-blue-50 rounded transition-colors">
-                                <Eye className="w-4 h-4" />
-                              </button>
-                              <button className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded transition-colors">
-                                <Trash2 className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>)}
-                    </tbody>
-                  </table>
+                <div className="space-y-4">
+                  {recentActivities.map(activity => <div key={activity.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                        <span className="text-sm text-gray-700">
+                          {activity.text}
+                        </span>
+                      </div>
+                      <span className="text-xs text-gray-400">
+                        {activity.time}
+                      </span>
+                    </div>)}
                 </div>
               </Card>
             </div>
 
-            {/* Right Sidebar - Activity Log */}
+            {/* Budget Usage Table (Simplified) */}
             <div className="lg:col-span-1">
               <Card className="h-full">
-                <h3 className="text-lg font-bold text-gray-900 mb-6">
-                  Activity Log
+                <h3 className="text-lg font-bold text-gray-900 mb-4">
+                  Penggunaan Anggaran Top 5
                 </h3>
-                <div className="space-y-6 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-100">
-                  {recentActivities.map(activity => <div key={activity.id} className="relative pl-10">
-                      <div className={`absolute left-2 top-0 -translate-x-1/2 w-5 h-5 rounded-full border-2 border-white shadow-sm flex items-center justify-center ${activity.color}`}>
-                        <activity.icon className="w-3 h-3" />
+                <div className="space-y-4">
+                  {[1, 2, 3, 4, 5].map(i => <div key={i} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                      <div className="flex justify-between items-start mb-1">
+                        <span className="text-xs font-bold text-gray-900">
+                          2901.EBA.994.00{i}.A
+                        </span>
+                        <Badge variant="primary">{8 - i}x</Badge>
                       </div>
-                      <div>
-                        <p className="text-sm text-gray-900">
-                          <span className="font-semibold">{activity.user}</span>{' '}
-                          {activity.action}{' '}
-                          <span className="font-medium text-[#00509E]">
-                            {activity.target}
-                          </span>
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {activity.time}
-                        </p>
-                      </div>
+                      <p className="text-xs text-gray-600">
+                        Belanja Bahan & Operasional Kantor
+                      </p>
                     </div>)}
                 </div>
+                <Button variant="outline" className="w-full mt-4 text-xs">
+                  Lihat Detail Anggaran
+                </Button>
               </Card>
             </div>
           </div>

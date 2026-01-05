@@ -10,6 +10,11 @@ import { RiwayatSurat } from './pages/RiwayatSurat';
 import { Profile } from './pages/Profile';
 import { ApprovalPage } from './pages/ApprovalPage';
 import { NotificationsPage } from './pages/NotificationsPage';
+import { AdminArchive } from './pages/admin/AdminArchive';
+import { AdminNotifications } from './pages/admin/AdminNotifications';
+import { AdminActivityLog } from './pages/admin/AdminActivityLog';
+import { AdminReporting } from './pages/admin/AdminReporting';
+import { AdminEmergency } from './pages/admin/AdminEmergency';
 export function App() {
   return <Router>
       <Routes>
@@ -22,7 +27,14 @@ export function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/mobile-approval" element={<MobileApproval />} />
         <Route path="/approval" element={<ApprovalPage />} />
+
+        {/* Admin Routes */}
         <Route path="/admin" element={<DashboardAdmin />} />
+        <Route path="/admin/archive" element={<AdminArchive />} />
+        <Route path="/admin/notifications" element={<AdminNotifications />} />
+        <Route path="/admin/activity-log" element={<AdminActivityLog />} />
+        <Route path="/admin/reporting" element={<AdminReporting />} />
+        <Route path="/admin/emergency" element={<AdminEmergency />} />
       </Routes>
 
       {/* Dev Navigation Helper - Remove in production */}
@@ -35,9 +47,6 @@ export function App() {
             <Link to="/login" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
               Login
             </Link>
-            <Link to="/register" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Register
-            </Link>
             <div className="border-t border-gray-200 my-1"></div>
             <Link to="/" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
               Staff Dashboard
@@ -45,23 +54,21 @@ export function App() {
             <Link to="/create-letter" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
               Create Letter
             </Link>
-            <Link to="/history" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Riwayat Surat
-            </Link>
-            <Link to="/notifications" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Notifikasi
-            </Link>
-            <Link to="/profile" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Profile
-            </Link>
-            <Link to="/approval" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Desktop Approval
-            </Link>
-            <Link to="/mobile-approval" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
-              Mobile Approval
-            </Link>
-            <Link to="/admin" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+            <div className="border-t border-gray-200 my-1"></div>
+            <Link to="/admin" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700 font-bold">
               Admin Dashboard
+            </Link>
+            <Link to="/admin/archive" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+              Admin Archive
+            </Link>
+            <Link to="/admin/activity-log" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+              Activity Log
+            </Link>
+            <Link to="/admin/reporting" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+              Reporting
+            </Link>
+            <Link to="/admin/emergency" className="px-3 py-2 hover:bg-gray-100 rounded text-sm text-gray-700">
+              Emergency
             </Link>
           </div>
         </div>

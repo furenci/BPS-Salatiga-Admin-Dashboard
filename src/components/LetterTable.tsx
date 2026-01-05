@@ -4,6 +4,7 @@ import { MoreHorizontal, Eye, Edit, Trash2 } from 'lucide-react';
 interface Letter {
   id: string;
   number: string;
+  letterType?: string;
   date: string;
   subject: string;
   status: 'Draft' | 'Pending' | 'Approved' | 'Rejected';
@@ -33,6 +34,7 @@ export function LetterTable({
         <thead className="text-xs text-gray-500 uppercase bg-gray-50 border-b border-gray-100">
           <tr>
             <th className="px-6 py-4 font-medium">No. Surat</th>
+            <th className="px-6 py-4 font-medium">Jenis Surat</th>
             <th className="px-6 py-4 font-medium">Tanggal</th>
             <th className="px-6 py-4 font-medium">Perihal</th>
             <th className="px-6 py-4 font-medium">Status</th>
@@ -43,6 +45,11 @@ export function LetterTable({
           {data.map(item => <tr key={item.id} className="bg-white hover:bg-gray-50 transition-colors">
               <td className="px-6 py-4 font-medium text-gray-900">
                 {item.number}
+              </td>
+              <td className="px-6 py-4 text-gray-600">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                  {item.letterType || 'Surat Tugas'}
+                </span>
               </td>
               <td className="px-6 py-4 text-gray-600">{item.date}</td>
               <td className="px-6 py-4 text-gray-900 max-w-xs truncate">
